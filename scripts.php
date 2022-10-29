@@ -30,7 +30,6 @@ function getTasks()
 
 function saveTask()
 {
-    if (isset($_POST['submit'])) {
         global $con;
         // Declaring Task Variables
         $title = $_POST['titleInput'];
@@ -52,7 +51,6 @@ function saveTask()
             echo "ALL Fields Are Required";
             die();
         }
-    }
     $_SESSION['message'] = "Task has been added successfully !";
     header('location: index.php');
 }

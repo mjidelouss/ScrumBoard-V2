@@ -10,10 +10,16 @@ function initializeTask(i) {
   let d=r.getAttribute("data-info");
   console.log(d);
   let arr=d.split(',')
-    updateTitle.value = arr[0];
-    updatePriority.value = arr[1];
-    updateType.value = arr[2];
-    updateStatus.value = arr[3];
-    updateDate.value = arr[4];
-    updateDesc.value = arr[5];
+  if (arr[2] === "Feature") {
+    document.getElementById("feature").checked = true;
+    document.getElementById("bug").checked = false;
+  } else {
+    document.getElementById("feature").checked = false;
+    document.getElementById("bug").checked = true;
+  }
+  updateTitle.value = arr[0];
+  updatePriority.value = arr[1];
+  updateDate.value = arr[4];
+  updateDesc.value = arr[5];
+  updateStatus.value = arr[3];
   }

@@ -74,8 +74,8 @@ while ($row = $res->fetch_assoc()) {
     if ($row["status_id"] == 1) {
         echo '
               <button
-              data-info="' . $row["title"] . ', ' . $row["priorityTitle"] . ', ' . $row["typeTitle"] . ', ' . $row["status_id"] . ', ' . $row["task_datetime"] . ', ' . $row["description"] . '"
-                data-bs-toggle="modal"
+              data-info="'. $row["title"].','.$row["priorityTitle"].','.$row["typeTitle"].','.$row["status_id"].','.$row["task_datetime"].','.$row["description"].'"
+              data-bs-toggle="modal"
                 data-bs-target="#delete-update-task"
                   class="col-12"
                   style="
@@ -83,7 +83,7 @@ while ($row = $res->fetch_assoc()) {
                     border: none;
                     border-bottom: 1px solid white;
                   "
-                  id="' . $row["id"] . '"
+                  id="'.$row["id"].'"
                   onclick="initializeTask('.$row["id"].')"
                 >
                   <div class="">
@@ -95,8 +95,8 @@ while ($row = $res->fetch_assoc()) {
                       >' . $row["title"] . '
                     </div>
                     <div class="ms-4">
-                      <div class="text-white">#' . $row["id"] . ' created in ' . $row["task_datetime"] . '
-      }</div>
+                      <div class="text-white">#' . $row["id"] . ' created in '.substr($row["task_datetime"], 0, 10).'
+      </div>
                       <div
                         class="text-white"
                         title=""
@@ -142,20 +142,20 @@ while ($row = $res->fetch_assoc()) {
 getTasks();
 while ($row = $res->fetch_assoc()) {
     if ($row["status_id"] == 2) {
-        echo '
-                    <button
-                    data-info="' . $row["title"] . ', ' . $row["priorityTitle"] . ', ' . $row["typeTitle"] . ', ' . $row["status_id"] . ', ' . $row["task_datetime"] . ', ' . $row["description"] . '"
-                    data-bs-toggle="modal"
-                    data-bs-target="#delete-update-task"
-                        class="col-12"
-                        style="
-                          background-color: #0f3460;
-                          border: none;
-                          border-bottom: 1px solid white;
-                        "
-                        id="' . $row["id"] . '"
-                        onclick="initializeTask('.$row["id"].')"
-                      >
+      echo '
+      <button
+        data-info="'. $row["title"].','.$row["priorityTitle"].','.$row["typeTitle"].','.$row["status_id"].','.$row["task_datetime"].','.$row["description"].'"
+              data-bs-toggle="modal"
+              data-bs-target="#delete-update-task"
+                  class="col-12"
+                  style="
+                    background-color: #0f3460;
+                    border: none;
+                    border-bottom: 1px solid white;
+                  "
+                  id="'. $row["id"].'"
+                  onclick="initializeTask('.$row["id"].')"
+                >
                         <div class="">
                           <i class=""></i>
                         </div>
@@ -168,8 +168,8 @@ while ($row = $res->fetch_assoc()) {
                             >$' . $row["title"] . '
                           </div>
                           <div class="ms-4">
-                            <div class="text-white">#' . $row["id"] . ' created in ' . $row["task_datetime"] . '
-            }</div>
+                            <div class="text-white">#' . $row["id"] . ' created in '.substr($row["task_datetime"], 0, 10).'
+            </div>
                             <div
                               class="text-white"
                               title=""
@@ -225,7 +225,7 @@ while ($row = $res->fetch_assoc()) {
                                   border: none;
                                   border-bottom: 1px solid white;
                                 "
-                                id="' . $row["id"] . '"
+                                id="'. $row["id"].'"
                                 onclick="initializeTask('.$row["id"].')"
                               >
                                 <div class="">
@@ -237,8 +237,8 @@ while ($row = $res->fetch_assoc()) {
                                     >' . $row["title"] . '
                                   </div>
                                   <div class="ms-4">
-                                    <div class="text-white">#' . $row["id"] . ' created in ' . $row["task_datetime"] . '
-                    }</div>
+                                    <div class="text-white">#' . $row["id"] . ' created in '.substr($row["task_datetime"], 0, 10).'
+                    </div>
                                     <div
                                       class="text-white"
                                       title=""
@@ -483,9 +483,9 @@ while ($row = $res->fetch_assoc()) {
                 id="update_status"
               >
                 <option disabled selected>Please select</option>
-                <option value="To Do">To Do</option>
-                <option value="In Progress">In Progress</option>
-                <option value="Done">Done</option>
+                <option value="1">To Do</option>
+                <option value="2">In Progress</option>
+                <option value="3">Done</option>
               </select>
             </div>
             <div class="">
