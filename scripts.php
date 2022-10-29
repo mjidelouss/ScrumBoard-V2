@@ -22,16 +22,16 @@ function getTasks()
     global $con;
     global $res;
     // SQL SELECT
-    $query = "SELECT tasks.id, tasks.title, tasks.status_id, types.name as typeTitle ,priorities.name as priorityTitle, tasks.task_datetime,
-    tasks.description FROM  tasks  inner join types  on tasks.type_id = types.id
-    inner join priorities on tasks.priority_id = priorities.id";
+    $query = "SELECT tasks.id, tasks.title, tasks.status_id, types.name AS typeTitle ,priorities.name AS priorityTitle, tasks.task_datetime,
+    tasks.description FROM  tasks  INNER JOIN types  ON tasks.type_id = types.id
+    INNER JOIN priorities ON tasks.priority_id = priorities.id";
     $res = $con->query($query);
 }
 
 function saveTask()
 {
-    if (isset($_POST['titleInput'])) {
-      global $con;
+    if (isset($_POST['submit'])) {
+        global $con;
         // Declaring Task Variables
         $title = $_POST['titleInput'];
         $typeInput = $_POST['typeInput'];
@@ -65,10 +65,30 @@ function updateTask()
     header('location: index.php');
 }
 
+// function initTask($id)
+// {
+//   global $con;
+//   $inisql = "SELECT * FROM tasks WHERE id = $id";
+//   $init = mysqli_query($con, $inisql);
+//   $row = mysqli_fetch_assoc($init);
+//   $title = $row['title'];
+//   $typeInput = $row['type_id'];
+//   $priority = $row['priority_id'];
+//   $statusInput = $row['status_id'];
+//   $dateInput = $row['task_datetime'];
+//   $descInput = $row['description'];
+// }
+
 function deleteTask()
 {
     //CODE HERE
     //SQL DELETE
+    if(isset($_GET['delid'])) {
+      $id = $_GET['delid'];
+
+      $delsql = "DELETE FROM tasks WHERE id = $id";
+      $del = mysqli_query($con, $delsql);
+    }
     $_SESSION['message'] = "Task has been deleted successfully !";
     header('location: index.php');
 }

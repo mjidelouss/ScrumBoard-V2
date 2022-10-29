@@ -74,7 +74,7 @@ while ($row = $res->fetch_assoc()) {
     if ($row["status_id"] == 1) {
         echo '
               <button
-                onclick=""
+              data-info="' . $row["title"] . ', ' . $row["priorityTitle"] . ', ' . $row["typeTitle"] . ', ' . $row["status_id"] . ', ' . $row["task_datetime"] . ', ' . $row["description"] . '"
                 data-bs-toggle="modal"
                 data-bs-target="#delete-update-task"
                   class="col-12"
@@ -83,6 +83,8 @@ while ($row = $res->fetch_assoc()) {
                     border: none;
                     border-bottom: 1px solid white;
                   "
+                  id="' . $row["id"] . '"
+                  onclick="initializeTask('.$row["id"].')"
                 >
                   <div class="">
                     <i class=""></i>
@@ -142,15 +144,17 @@ while ($row = $res->fetch_assoc()) {
     if ($row["status_id"] == 2) {
         echo '
                     <button
+                    data-info="' . $row["title"] . ', ' . $row["priorityTitle"] . ', ' . $row["typeTitle"] . ', ' . $row["status_id"] . ', ' . $row["task_datetime"] . ', ' . $row["description"] . '"
                     data-bs-toggle="modal"
                     data-bs-target="#delete-update-task"
-                    onclick=""
                         class="col-12"
                         style="
                           background-color: #0f3460;
                           border: none;
                           border-bottom: 1px solid white;
                         "
+                        id="' . $row["id"] . '"
+                        onclick="initializeTask('.$row["id"].')"
                       >
                         <div class="">
                           <i class=""></i>
@@ -164,7 +168,7 @@ while ($row = $res->fetch_assoc()) {
                             >$' . $row["title"] . '
                           </div>
                           <div class="ms-4">
-                            <div class="text-white">' . $row["id"] . ' created in ' . $row["task_datetime"] . '
+                            <div class="text-white">#' . $row["id"] . ' created in ' . $row["task_datetime"] . '
             }</div>
                             <div
                               class="text-white"
@@ -212,15 +216,17 @@ while ($row = $res->fetch_assoc()) {
     if ($row["status_id"] == 3) {
         echo '
                     <button
-                            onclick=""
+                      data-info="'. $row["title"].','.$row["priorityTitle"].','.$row["typeTitle"].','.$row["status_id"].','.$row["task_datetime"].','.$row["description"].'"
                             data-bs-toggle="modal"
                             data-bs-target="#delete-update-task"
-                                class="col-12 draggable"
+                                class="col-12"
                                 style="
                                   background-color: #0f3460;
                                   border: none;
                                   border-bottom: 1px solid white;
                                 "
+                                id="' . $row["id"] . '"
+                                onclick="initializeTask('.$row["id"].')"
                               >
                                 <div class="">
                                   <i class=""></i>
@@ -231,7 +237,7 @@ while ($row = $res->fetch_assoc()) {
                                     >' . $row["title"] . '
                                   </div>
                                   <div class="ms-4">
-                                    <div class="text-white">' . $row["id"] . ' created in ' . $row["task_datetime"] . '
+                                    <div class="text-white">#' . $row["id"] . ' created in ' . $row["task_datetime"] . '
                     }</div>
                                     <div
                                       class="text-white"
@@ -253,7 +259,8 @@ while ($row = $res->fetch_assoc()) {
                                     >
                                   </div>
                                 </div>
-                              </button>';
+                              </button>
+                              ';
     }
 }
 ?>
@@ -435,7 +442,7 @@ while ($row = $res->fetch_assoc()) {
             <div class="d-flex">
               <div class="form-check ms-3">
                 <input
-                  name="type"
+                  name="updateType"
                   value="Bug"
                   class="form-check-input"
                   type="radio"
@@ -445,7 +452,7 @@ while ($row = $res->fetch_assoc()) {
               </div>
               <div class="form-check ms-3">
                 <input
-                  name="type"
+                  name="updateType"
                   value="Feature"
                   class="form-check-input"
                   type="radio"
@@ -504,25 +511,38 @@ while ($row = $res->fetch_assoc()) {
             style="background-color: #0f3460; border: none"
             id="modalFooter"
           >
-            <button
-              type="button"
-              style="
-                background-color: #c8c8c8;
-                color: #e94560;
-                font-weight: bold;
-              "
-              class="btn btn-light border rounded-pill"
-            >
-              DELETE
-            </button>
-            <button
-              type="submit"
-              id="save"
-              style="background-color: #e94560; font-weight: bold"
-              class="btn btn-primary rounded-pill text-white"
-            >
-              UPDATE
-            </button>
+          <button
+      type="button"
+      style="
+        background-color: #c8c8c8;
+        color: #e94560;
+        font-weight: bold;
+      "
+      class="btn btn-light border rounded-pill"
+      data-bs-dismiss="modal"
+    >
+    Cancel
+    </button>
+      <button
+      type="submit"
+      style="
+        background-color: #FF0660;
+        color: white;
+        font-weight: bold;
+      "
+      class="btn btn-light border rounded-pill"
+      name="delete"
+    >
+    DELETE
+    </button>
+    <button
+      type="submit"
+      style="background-color: green; font-weight: bold"
+      class="btn btn-primary rounded-pill text-white"
+      name="update"
+    >
+    UPDATE
+    </button>
           </div>
         </div>
       </div>
