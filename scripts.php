@@ -40,13 +40,8 @@ function saveTask()
         $descInput = $_POST['descInput'];
         if (!empty($title) || !empty($typeInput) || !empty($priority) || !empty($statusInput) ||
             !empty($dateInput) || !empty($descInput)) {
-            $INSERT = "INSERT INTO tasks (title, type_id, priority_id, status_id, task_datetime, description) values (?, ?, ?, ?, ?, ?)";
-            // Prepare Statement
-            $stat = $con->prepare($INSERT);
-            $stat->bind_param("siiiss", $title, $typeInput, $priority, $statusInput, $dateInput, $descInput);
-            $stat->execute();
-            $stat->close();
-            $con->close();
+            $sql = "INSERT INTO tasks (title, type_id, priority_id, status_id, task_datetime, description) values ('$title', '$typeInput', '$priority', '$statusInput', '$dateInput', '$descInput')";
+            $con->query($sql);
         } else {
             echo "ALL Fields Are Required";
             die();
