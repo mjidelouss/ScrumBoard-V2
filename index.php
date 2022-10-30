@@ -139,10 +139,10 @@ while ($row = $res->fetch_assoc()) {
               >
               <?php
                 global $con;
-                $sql = "SELECT COUNT(*) FROM tasks WHERE status_id = 1";
+                $sql = "SELECT COUNT(*) FROM tasks WHERE status_id = 2";
                 $res = $con->query($sql);
                 $row = $res->fetch_assoc();
-                $toDoCount = $row['COUNT(*)'];
+                $inProgressCount = $row['COUNT(*)'];
                 echo '<h4 class="">
                   In Progress (<span id="in-progress-tasks-count">'.$inProgressCount.'</span>)
                 </h4>';
@@ -218,7 +218,14 @@ while ($row = $res->fetch_assoc()) {
                 class="col-12 text-white p-2 rounded-top"
                 style="background-image: linear-gradient(#e94560, #0f3460)"
               >
-                <h4 class="">Done (<span id="done-tasks-count">4</span>)</h4>
+              <?php
+                global $con;
+                $sql = "SELECT COUNT(*) FROM tasks WHERE status_id = 3";
+                $res = $con->query($sql);
+                $row = $res->fetch_assoc();
+                $doneCount = $row['COUNT(*)'];
+                echo '<h4 class="">Done (<span id="done-tasks-count">'.$doneCount.'</span>)</h4>'
+                ?>
               </div>
               <div class="taskTables" id="done-tasks">
                 <!-- DONE TASKS HERE -->
