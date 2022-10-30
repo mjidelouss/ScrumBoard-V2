@@ -7,10 +7,10 @@ const updateType = document.getElementById("updateType");
 const taskId = document.getElementById("tasId");
 
 function initializeTask(i) {
-  let r = document.getElementById(i);
-  let d = r.getAttribute("data-info");
-  console.log(d);
-  let arr=d.split(',')
+  let init = document.getElementById(i);
+  let dataInfo = init.getAttribute("data-info");
+  let arr = dataInfo.split(',')
+  let date = arr[4].split(' ');
   if (arr[2] === "Feature") {
     document.getElementById("feature").checked = true;
     document.getElementById("bug").checked = false;
@@ -20,7 +20,7 @@ function initializeTask(i) {
   }
   updateTitle.value = arr[0];
   updatePriority.value = arr[1];
-  updateDate.value = arr[4];
+  updateDate.value = date[0];
   updateDesc.value = arr[5];
   updateStatus.value = arr[3];
   taskId.value = i;
