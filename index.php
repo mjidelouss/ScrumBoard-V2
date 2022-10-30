@@ -63,7 +63,14 @@ include 'scripts.php';
                 class="col-12 text-white p-2 rounded-top"
                 style="background-image: linear-gradient(#e94560, #0f3460)"
               >
-                <h4 class="">To do (<span id="to-do-tasks-count"></span>)</h4>
+              <?php
+                global $con;
+                $sql = "SELECT COUNT(*) FROM tasks WHERE status_id = 1";
+                $res = $con->query($sql);
+                $row = $res->fetch_assoc();
+                $toDoCount = $row['COUNT(*)'];
+                echo '<h4 class="">To do (<span id="to-do-tasks-count">'.$toDoCount.'</span>)</h4>';
+                ?>
               </div>
               <div class="taskTables" id="to-do-tasks">
                 <!-- TO DO TASKS HERE -->
@@ -130,9 +137,16 @@ while ($row = $res->fetch_assoc()) {
                 class="col-12 text-white p-2 rounded-top"
                 style="background-image: linear-gradient(#e94560, #0f3460)"
               >
-                <h4 class="">
-                  In Progress (<span id="in-progress-tasks-count">4</span>)
-                </h4>
+              <?php
+                global $con;
+                $sql = "SELECT COUNT(*) FROM tasks WHERE status_id = 1";
+                $res = $con->query($sql);
+                $row = $res->fetch_assoc();
+                $toDoCount = $row['COUNT(*)'];
+                echo '<h4 class="">
+                  In Progress (<span id="in-progress-tasks-count">'.$inProgressCount.'</span>)
+                </h4>';
+                ?>
               </div>
               <div class="taskTables" id="in-progress-tasks">
                 <!-- IN PROGRESS TASKS HERE -->
@@ -419,6 +433,7 @@ while ($row = $res->fetch_assoc()) {
     <div class="modal fade" id="delete-update-task">
       <div class="modal-dialog">
         <div class="modal-content">
+        <form action="scripts.php" method="POST" id="updelForm-task">
           <div
             class="modal-header"
             style="
@@ -430,12 +445,14 @@ while ($row = $res->fetch_assoc()) {
           </div>
           <div class="modal-body" style="background-color: #0f3460">
             <div class="" id="taskForm">
+            <input type="text" id="tasId" name="taskId" style="display: none">
               <label class="col-form-label text-white">Title</label>
               <input
                 type="text"
                 class="form-control"
                 style="background-color: #c8c8c8"
                 id="update_title"
+                name="newTitle"
               />
             </div>
             <label class="col-form-label text-white" id="typ">Type</label>
@@ -467,6 +484,7 @@ while ($row = $res->fetch_assoc()) {
                 class="form-select"
                 style="background-color: #c8c8c8"
                 id="update_priority"
+                name="newPriority"
               >
                 <option disabled selected>Please select</option>
                 <option value="Low">Low</option>
@@ -481,6 +499,7 @@ while ($row = $res->fetch_assoc()) {
                 class="form-select"
                 style="background-color: #c8c8c8"
                 id="update_status"
+                name="newStatus"
               >
                 <option disabled selected>Please select</option>
                 <option value="1">To Do</option>
@@ -495,6 +514,7 @@ while ($row = $res->fetch_assoc()) {
                 class="form-control"
                 style="background-color: #c8c8c8"
                 id="update_dateInput"
+                name="newDate"
               />
             </div>
             <div class="">
@@ -503,6 +523,7 @@ while ($row = $res->fetch_assoc()) {
                 class="form-control"
                 style="background-color: #c8c8c8"
                 id="update_desc"
+                name="newDesc"
               ></textarea>
             </div>
           </div>
@@ -543,6 +564,7 @@ while ($row = $res->fetch_assoc()) {
     >
     UPDATE
     </button>
+    </form>
           </div>
         </div>
       </div>

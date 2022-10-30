@@ -4,10 +4,11 @@ const updateDesc = document.getElementById("update_desc");
 const updateStatus = document.getElementById("update_status");
 const updatePriority = document.getElementById("update_priority");
 const updateType = document.getElementById("updateType");
+const taskId = document.getElementById("tasId");
 
 function initializeTask(i) {
-  let r=document.getElementById(i);
-  let d=r.getAttribute("data-info");
+  let r = document.getElementById(i);
+  let d = r.getAttribute("data-info");
   console.log(d);
   let arr=d.split(',')
   if (arr[2] === "Feature") {
@@ -22,4 +23,5 @@ function initializeTask(i) {
   updateDate.value = arr[4];
   updateDesc.value = arr[5];
   updateStatus.value = arr[3];
+  taskId.value = i;
   }

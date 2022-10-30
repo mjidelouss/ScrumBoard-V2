@@ -59,34 +59,46 @@ function updateTask()
 {
     //CODE HERE
     //SQL UPDATE
+    global $con;
+    $id = $_POST['taskId'];
+    $title = $_POST['newTitle'];
+    $type = $_POST['updateType'];
+    $priority = $_POST['newPriority'];
+    $status = $_POST['newStatus'];
+    $date = $_POST['newDate'];
+    $desc = $_POST['newDesc'];
+    $typeId;
+    $priorityId;
+    if ($type == "Feature"){
+        $typeId = 1;
+    }
+    else {
+        $typeId = 2;
+    }
+    if ($priority == "Low"){
+        $priorityId = 1;
+    }
+    if ($priority == "Medium"){
+        $priorityId = 2;
+    }
+    if ($priority == "High"){
+        $priorityId = 3;
+    }
+    if ($priority == "Critical"){
+        $priorityId = 4;
+    }
+    $sql = "UPDATE tasks SET id = $id, title = '$title', type_id = '$typeId', priority_id = '$priorityId', status_id = '$status', task_datetime = '$date', description = '$desc' WHERE id = $id";
+    $con->query($sql);
     $_SESSION['message'] = "Task has been updated successfully !";
     header('location: index.php');
 }
 
-// function initTask($id)
-// {
-//   global $con;
-//   $inisql = "SELECT * FROM tasks WHERE id = $id";
-//   $init = mysqli_query($con, $inisql);
-//   $row = mysqli_fetch_assoc($init);
-//   $title = $row['title'];
-//   $typeInput = $row['type_id'];
-//   $priority = $row['priority_id'];
-//   $statusInput = $row['status_id'];
-//   $dateInput = $row['task_datetime'];
-//   $descInput = $row['description'];
-// }
-
 function deleteTask()
 {
-    //CODE HERE
-    //SQL DELETE
-    if(isset($_GET['delid'])) {
-      $id = $_GET['delid'];
-
-      $delsql = "DELETE FROM tasks WHERE id = $id";
-      $del = mysqli_query($con, $delsql);
-    }
+    global $con;
+    $id = $_POST['taskId'];
+    $sql = "DELETE FROM tasks WHERE id = $id";
+    $con->query($sql);
     $_SESSION['message'] = "Task has been deleted successfully !";
     header('location: index.php');
 }
