@@ -17,6 +17,7 @@ if (isset($_POST['delete'])) {
     deleteTask();
 }
 
+// getTasks Function collects the tasks data from the database tables
 function getTasks()
 {
     global $con;
@@ -28,6 +29,7 @@ function getTasks()
     $res = $con->query($query);
 }
 
+// saveTask Function adds a new task to the database table
 function saveTask()
 {
         global $con;
@@ -50,6 +52,7 @@ function saveTask()
     header('location: index.php');
 }
 
+// updateTask Function updates a task inside the database table
 function updateTask()
 {
     //CODE HERE
@@ -88,6 +91,7 @@ function updateTask()
     header('location: index.php');
 }
 
+// deleteTask function deletes a task from the database table
 function deleteTask()
 {
     global $con;

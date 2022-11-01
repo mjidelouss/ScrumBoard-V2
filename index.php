@@ -47,6 +47,7 @@ include 'scripts.php';
 
           <div class="col-6 text-end">
             <button
+              onclick="resetTasks()"
               class="p-2 text-white rounded-pill"
               data-bs-toggle="modal"
               data-bs-target="#modal-task"
@@ -108,7 +109,7 @@ while ($row = $res->fetch_assoc()) {
                         class="text-white"
                         title=""
                       >
-                      ' . $row["description"] . '
+                      '.substr($row["description"], 0, 60).'
                       </div>
                     </div>
                     <div class="mt-2 text-start ms-4 mb-1">
@@ -188,7 +189,7 @@ while ($row = $res->fetch_assoc()) {
                               class="text-white"
                               title=""
                             >
-                            ' . $row["description"] . '
+                            '.substr($row["description"], 0, 60).'
                             </div>
                           </div>
                           <div class="mt-2 text-start ms-4 mb-1">
@@ -264,7 +265,7 @@ while ($row = $res->fetch_assoc()) {
                                       class="text-white"
                                       title=""
                                     >
-                                    ' . $row["description"] . '
+                                    '.substr($row["description"], 0, 60).'
                                     </div>
                                   </div>
                                   <div class="mt-2 text-start ms-4 mb-1">

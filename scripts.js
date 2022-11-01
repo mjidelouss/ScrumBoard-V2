@@ -1,3 +1,4 @@
+// Variables of the update and delete modal
 const updateTitle = document.getElementById("update_title");
 const updateDate = document.getElementById("update_dateInput");
 const updateDesc = document.getElementById("update_desc");
@@ -6,9 +7,9 @@ const updatePriority = document.getElementById("update_priority");
 const updateType = document.getElementById("updateType");
 const taskId = document.getElementById("tasId");
 
+// Function that initializes the Tasks buttons with there resepective values
 function initializeTask(i) {
-  let init = document.getElementById(i);
-  let dataInfo = init.getAttribute("data-info");
+  let dataInfo = document.getElementById(i).getAttribute("data-info");
   let arr = dataInfo.split(',')
   let date = arr[4].split(' ');
   if (arr[2] === "Feature") {
@@ -24,4 +25,9 @@ function initializeTask(i) {
   updateDesc.value = arr[5];
   updateStatus.value = arr[3];
   taskId.value = i;
+  }
+
+  // resetTasks Function resets the forms inputs
+  function resetTasks(){
+    document.getElementById("form-task").reset();
   }
